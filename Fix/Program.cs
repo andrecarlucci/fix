@@ -1,6 +1,7 @@
 ﻿using Fix.ConsoleHelpers;
 using Fix.CommandFixers;
 using System;
+using System.Linq;
 
 namespace Fix
 {
@@ -8,9 +9,13 @@ namespace Fix
     {
         static void Main(string[] args)
         {
-            if(args.Length > 0 && args[0].ToLower() == "debug")
+            if(args.Any(x => x == "-debug"))
             {
                 ConsoleHelper.Debug = true;
+            }
+            if (args.Any(x => x == "-plan"))
+            {
+                ConsoleHelper.Plan = true;
             }
 
             var lines = ConsoleHelper.ReadActiveBufferAsLines();
@@ -22,6 +27,10 @@ namespace Fix
             
             var actionManager = new ActionManager();
             actionManager.AddFix(new GitSimilar());
+            actionManager.AddFix(new GitBranchHasNoUpstream());
+            actionManager.AddFix(new GitTipOfYourBranchIsBehind());
+            actionManager.AddFix(new GitRefusingToMergeUnrelatedHistories());
+            
             var command = actionManager.GetFix(lines);
 
             if(!command.IsFixed)

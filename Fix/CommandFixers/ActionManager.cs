@@ -30,17 +30,29 @@ namespace Fix.CommandFixers
             return lastCommandLine[(index + 1)..];
         }
 
+        private string[] FilterLastCommand(string lastCommand, string[] lines)
+        {
+            var currentPath = ConsoleHelper.GetCurrentPath();
+            return lines.Reverse()
+                        .Skip(1)
+                        .TakeWhile(x => x != $"{currentPath}{ConsoleHelper.CONSOLE_SEPARATOR}{lastCommand}")
+                        .Reverse()
+                        .ToArray();
+        }
+
         public CommandFix GetFix(string[] consoleBufferInLines)
         {
             LastCommand = GetLastCommand(consoleBufferInLines);
-            ConsoleHelper.Log("LastCommand:" + LastCommand);
+            var lastCommandResult = FilterLastCommand(LastCommand, consoleBufferInLines);
+
+            LogBuffer(lastCommandResult);
 
             foreach (var fix in _fixActions)
             {
-                var fixResult = fix.Fix(LastCommand, consoleBufferInLines);
-                if(fixResult.IsFixed)
+                var fixResult = fix.Fix(LastCommand, lastCommandResult);
+                if (fixResult.IsFixed)
                 {
-                    ConsoleHelper.Log($"Fixer {fix.GetType().Name} FIXED!");
+                    ConsoleHelper.Log($"Fixer {fix.GetType().Name} FIXED IT!");
                     return fixResult;
                 }
                 else
@@ -49,6 +61,20 @@ namespace Fix.CommandFixers
                 }
             }
             return new CommandFix(false, "", nameof(ActionManager));
+        }
+
+        private void LogBuffer(string[] consoleBufferInLines)
+        {
+            ConsoleHelper.Log("LastCommand:" + LastCommand);
+
+            ConsoleHelper.Log("---------------");
+            ConsoleHelper.Log("Buffer:");
+            ConsoleHelper.Log("---------------");
+            for (var i = 0; i < consoleBufferInLines.Length; i++)
+            {
+                ConsoleHelper.Log(consoleBufferInLines[i]);
+            }
+            ConsoleHelper.Log("---------------");
         }
     }
 }

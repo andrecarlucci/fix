@@ -13,7 +13,6 @@ namespace Fix.Tests
             var consoleBuffer = @"C:\dev\app>git push
 fatal: The current branch main has no upstream branch.
 To push the current branch and set the remote as upstream, use
-
     git push --set-upstream origin main
 
 

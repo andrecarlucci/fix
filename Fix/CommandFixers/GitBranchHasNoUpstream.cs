@@ -15,7 +15,7 @@ namespace Fix.CommandFixers
             {
                 if(FileSystemName.MatchesSimpleExpression("fatal: The current branch * has no upstream branch.", consoleBufferInLines[i]))
                 {
-                    var suggested = consoleBufferInLines[i + 3].Trim();
+                    var suggested = consoleBufferInLines[i + 2].Trim();
                     return CommandFix.FixesWith(suggested);
                 }
             }

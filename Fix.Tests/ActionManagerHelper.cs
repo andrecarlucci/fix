@@ -9,6 +9,9 @@ namespace Fix.Tests
             var actionManager = new ActionManager();
             actionManager.AddFix(new GitSimilar());
             actionManager.AddFix(new GitBranchHasNoUpstream());
+            actionManager.AddFix(new GitTipOfYourBranchIsBehind());
+            actionManager.AddFix(new GitRefusingToMergeUnrelatedHistories());
+            
             return actionManager;
         }
     }

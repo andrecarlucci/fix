@@ -8,6 +8,9 @@ namespace Fix.ConsoleHelpers
 {
     public static class ConsoleHelper
     {
+        public static bool Debug = false;
+        public static bool Plan = false;
+
 
         public const string CONSOLE_SEPARATOR = ">";
         public static Func<string> GetCurrentPath { get; set; } = () => Environment.CurrentDirectory;
@@ -22,6 +25,10 @@ namespace Fix.ConsoleHelpers
                 UseShellExecute = false
             };
             Console.WriteLine(GetCurrentPath() + CONSOLE_SEPARATOR + command);
+            if(Plan)
+            {
+                return;
+            }
             Process.Start(startInfo).WaitForExit();
         }
 
@@ -35,8 +42,8 @@ namespace Fix.ConsoleHelpers
             var buffer = new StringBuilder();
             for (var i = 0; i < h; i++)
             {
-                var line = sb.ReadXY(w, 0, i).Trim();
-                if (line.Length > 0)
+                var line = sb.ReadXY(w, 0, i).TrimEnd();
+                if (!String.IsNullOrWhiteSpace(line))
                 {
                     lines.Add(line);
                 }
@@ -44,7 +51,6 @@ namespace Fix.ConsoleHelpers
             return lines.ToArray();
         }
 
-        public static bool Debug = false;
 
         public static void Log(string line)
         {
