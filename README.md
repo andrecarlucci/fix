@@ -4,6 +4,9 @@ Fix it is a little pet project that corrects simple errors we do sometimes in co
 
 It is a sameless copy of the amazing project [TheFuck](https://github.com/nvbn/thefuck), but written in c# and made for Windows.
 
+![Fix in action](/Media/fixit.gif)
+
+
 ## Examples:
 
 ### Fixing git typos
