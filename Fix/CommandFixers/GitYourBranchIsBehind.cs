@@ -15,7 +15,7 @@ namespace Fix.CommandFixers
             {
                 if (FileSystemName.MatchesSimpleExpression(" ! [rejected]        * -> * (fetch first)", consoleBufferInLines[i]))
                 {
-                    return CommandFix.FixesWith(lastCommand.Replace(" push ", " pull "));
+                    return CommandFix.FixesWith(lastCommand.Replace(" push", " pull"));
                 }
             }
             return CommandFix.CantFix();
