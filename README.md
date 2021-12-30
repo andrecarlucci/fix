@@ -31,11 +31,15 @@ Your branch is up to date with 'origin/main'.
 - Dotnet 5.0 installed
 
 ## Instalation
-- Just copy the fix.exe file to your path.
+- Just copy the [fix.exe](https://github.com/andrecarlucci/fix/releases/tag/v0.1) file to your path.
 
 ## Switches
 - fix.exe -debug : shows debug information.
 - fix.exe -plan  : only shows the fixed command but doesn't execute it. 
+
+# WARNING!
+ Use this on your own risk! We are not responsible for any damage this little tool might cause to your machine.
+ **Fix it** will execute commands in your console, so check the source code to understand what these might be. 
 
 ## License MIT
 Project License can be found [here](https://github.com/andrecarlucci/fix/blob/main/LICENSE).
