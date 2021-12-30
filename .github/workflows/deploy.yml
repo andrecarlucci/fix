@@ -27,4 +27,17 @@ jobs:
       - name: Publish
         run: dotnet publish -c Release --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true -r win-x64 ${{ github.workspace }}/Fix/Fix.csproj
         
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Automated Release by GitHub Action CI
+          draft: false
+          prerelease: true
+        
        
