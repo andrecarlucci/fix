@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths-ignore:
-      - "deploy.yml"
+      - "**/deploy.yml"
       - "**.md"
   pull_request:
     branches:
       - main
     paths-ignore:
-      - "deploy.yml"
+      - "**/deploy.yml"
       - "**.md"
       
 jobs:
