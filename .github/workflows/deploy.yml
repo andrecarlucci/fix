@@ -40,4 +40,9 @@ jobs:
           draft: false
           prerelease: true
         
+      - uses: papeloto/action-zip@v1
+        with:
+          files: ${{ github.workspace }}/fix/bin/Release/net5.0/win-x64/publish/
+          dest: fix.zip
        
+      
