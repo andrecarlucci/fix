@@ -21,8 +21,8 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
+#      - name: Test
+#        run: dotnet test --no-build --verbosity normal
       
       - name: Publish
         run: dotnet publish -c Release --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true -r win-x64 ${{ github.workspace }}/Fix/Fix.csproj
@@ -45,4 +45,8 @@ jobs:
           files: ${{ github.workspace }}/fix/bin/Release/net5.0/win-x64/publish/*.*
           dest: fix.zip
        
+      - uses: actions/upload-artifact@v1
+        with:
+          name: fix
+          path: ${{ github.workspace }}/fix.zip
       
