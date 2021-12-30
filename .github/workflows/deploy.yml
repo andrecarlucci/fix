@@ -25,6 +25,6 @@ jobs:
         run: dotnet test --no-build --verbosity normal
       
       - name: Publish
-        run: dotnet publish -c Release --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true -r win-x64 Fix\Fix\Fix.csproj
+        run: dotnet publish -c Release --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true -r win-x64 ${{ github.workspace }}/Fix/Fix/Fix.csproj
         
        
