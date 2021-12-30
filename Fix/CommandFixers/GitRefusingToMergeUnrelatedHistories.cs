@@ -4,7 +4,7 @@
     {
         public CommandFix Fix(string lastCommand, string[] lines)
         {
-            if (!lastCommand.StartsWith("git pull "))
+            if (!lastCommand.StartsWith("git pull"))
             {
                 return CommandFix.CantFix();
             }

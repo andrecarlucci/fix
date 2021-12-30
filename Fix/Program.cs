@@ -25,11 +25,7 @@ namespace Fix
                 Console.WriteLine("Nothing to fix");
             }
             
-            var actionManager = new ActionManager();
-            actionManager.AddFix(new GitSimilar());
-            actionManager.AddFix(new GitBranchHasNoUpstream());
-            actionManager.AddFix(new GitTipOfYourBranchIsBehind());
-            actionManager.AddFix(new GitRefusingToMergeUnrelatedHistories());
+            var actionManager = new ActionManagerFactory().Create();
             
             var command = actionManager.GetFix(lines);
 
