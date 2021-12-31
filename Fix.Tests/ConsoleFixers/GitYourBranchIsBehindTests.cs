@@ -25,7 +25,7 @@ C:\dev\app>fix
             var lines = consoleBuffer.Split(Environment.NewLine);
             ConsoleHelper.GetCurrentPath = () => @"C:\dev\app";
 
-            var manager = ActionManagerHelper.CreateActionManager();
+            var manager = SetupTestsHelper.CreateActionManager();
             var fix = manager.GetFix(lines);
 
             Assert.Equal(nameof(GitYourBranchIsBehind), fix.Author);

@@ -6,16 +6,14 @@ using Xunit;
 
 namespace Fix.ConsoleFixers.Tests
 {
-    public class GitBranchHasNoUpstreamTests
+    public class DosSimpleTypoTests
     {
         [Fact]
-        public void Can_fix_git_branch_no_upstream()
+        public void Can_fix_simple_dos_typo__dir()
         {
-            var consoleBuffer = @"C:\dev\app>git push
-fatal: The current branch main has no upstream branch.
-To push the current branch and set the remote as upstream, use
-    git push --set-upstream origin main
-
+            var consoleBuffer = @"C:\dev\app>dri /a /b /o
+'dri' is not recognized as an internal or external command,
+operable program or batch file.
 
 C:\dev\app>fix
 ";
@@ -25,9 +23,9 @@ C:\dev\app>fix
             var manager = SetupTestsHelper.CreateActionManager();
             var fix = manager.GetFix(lines);
 
-            Assert.Equal(nameof(GitBranchHasNoUpstream), fix.Author);
+            Assert.Equal(nameof(DosSimpleTypo), fix.Author);
             Assert.True(fix.IsFixed);
-            Assert.Equal("git push --set-upstream origin main", fix.FixedCommand);
+            Assert.Equal("dir /a /b /o", fix.FixedCommand);
         }
     }
 }
