@@ -47,6 +47,10 @@ Then we pass the last command and lines returned by it as input to all the regis
 
 There, you fixed!
 
+## Got you, how do I contribute with a new Fix?
+
+Check it out here: [Contribution guidelines for this project](CONTRIBUTING.md)
+
 # WARNING!
  Use this on your own risk! We are not responsible for any damage this little tool might cause to your machine.
  **Fix it** will execute commands in your console, so check the source code to understand what these might be. 
