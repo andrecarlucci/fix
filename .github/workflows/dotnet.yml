@@ -2,10 +2,18 @@ name: Build & Test on Push
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths-ignore:
+      - "**/deploy.yml"
+      - "**.md"
   pull_request:
-    branches: [ main ]
-
+    branches:
+      - main
+    paths-ignore:
+      - "**/deploy.yml"
+      - "**.md"
+      
 jobs:
   build:
 
