@@ -1,6 +1,6 @@
 ﻿namespace Fix.CommandFixers
 {
-    public class GitSimilar : CommandFixer
+    public class GitSimilar : ICommandFixer
     {
         public CommandFix Fix(string lastCommand, string[] consoleBufferInLines)
         {

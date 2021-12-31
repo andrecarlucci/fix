@@ -1,6 +1,6 @@
 ﻿namespace Fix.CommandFixers
 {
-    public class GitRefusingToMergeUnrelatedHistories : CommandFixer
+    public class GitRefusingToMergeUnrelatedHistories : ICommandFixer
     {
         public CommandFix Fix(string lastCommand, string[] lines)
         {

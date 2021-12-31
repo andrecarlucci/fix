@@ -2,7 +2,7 @@ using System.IO.Enumeration;
 
 namespace Fix.CommandFixers
 {
-    public class GitBranchHasNoUpstream : CommandFixer
+    public class GitBranchHasNoUpstream : ICommandFixer
     {
         public CommandFix Fix(string lastCommand, string[] consoleBufferInLines)
         {

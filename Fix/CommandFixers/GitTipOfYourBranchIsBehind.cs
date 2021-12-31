@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Fix.CommandFixers
 {
-    public class GitTipOfYourBranchIsBehind : CommandFixer
+    public class GitTipOfYourBranchIsBehind : ICommandFixer
     {
         public CommandFix Fix(string lastCommand, string[] consoleBufferInLines)
         {

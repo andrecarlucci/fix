@@ -6,11 +6,11 @@ namespace Fix.CommandFixers
 {
     public class ActionManager
     {
-        private List<CommandFixer> _fixActions = new();
+        private List<ICommandFixer> _fixActions = new();
 
         public string LastCommand { get; private set; } = "";
 
-        public void AddFix(CommandFixer fixAction)
+        public void AddFix(ICommandFixer fixAction)
         {
             _fixActions.Add(fixAction);
         }

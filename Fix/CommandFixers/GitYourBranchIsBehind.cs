@@ -2,7 +2,7 @@
 
 namespace Fix.CommandFixers
 {
-    public class GitYourBranchIsBehind : CommandFixer
+    public class GitYourBranchIsBehind : ICommandFixer
     {
         public CommandFix Fix(string lastCommand, string[] consoleBufferInLines)
         {
