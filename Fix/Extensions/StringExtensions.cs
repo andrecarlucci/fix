@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.IO.Enumeration;
+using System.Text.RegularExpressions;
 
 namespace Fix.Helpers
 {
@@ -16,6 +17,11 @@ namespace Fix.Helpers
         {
             var regex = new Regex(Regex.Escape(oldValue));
             return regex.Replace(text, newValue, 1);
+        }
+
+        public static bool MatchesSimpleExpression(this string text, string expression)
+        {
+            return FileSystemName.MatchesSimpleExpression(expression, text);
         }
     }
 }

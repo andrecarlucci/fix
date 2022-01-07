@@ -13,7 +13,8 @@ namespace Fix.CommandFixers
 
             for (var i = 0; i < consoleBufferInLines.Length; i++)
             {
-                if (consoleBufferInLines[i].Contains(" is misspelled or not recognized by the system."))
+                if (consoleBufferInLines[i].Contains(" is misspelled or not recognized by the system.") &&
+                    consoleBufferInLines[i+1].StartsWith("Did you mean"))
                 {
                     var wrongWord = consoleBufferInLines[i].FindFirstWordBetweenSingleQuotes();
                     var correctWord = consoleBufferInLines[i + 1].FindFirstWordBetweenSingleQuotes();

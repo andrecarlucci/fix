@@ -1,22 +1,21 @@
-using Fix.Helpers;
+﻿using Fix.Helpers;
 
 namespace Fix.CommandFixers
 {
-    public class GitBranchHasNoUpstream : ICommandFixer
+    public class AzCliLoginNeeded : ICommandFixer
     {
         public CommandFix Fix(string lastCommand, string[] consoleBufferInLines)
         {
-            if (!lastCommand.StartsWith("git push"))
+            if (!lastCommand.StartsWith("az "))
             {
                 return CommandFix.CantFix();
             }
 
             for (var i = 0; i < consoleBufferInLines.Length; i++)
             {
-                if(consoleBufferInLines[i].MatchesSimpleExpression("fatal: The current branch * has no upstream branch."))
+                if (consoleBufferInLines[i].MatchesSimpleExpression("User * does not exist in MSAL token cache. Run `az login`."))
                 {
-                    var suggested = consoleBufferInLines[i + 2].Trim();
-                    return CommandFix.FixesWith(suggested);
+                    return CommandFix.FixesWith("az login");
                 }
             }
             return CommandFix.CantFix();
