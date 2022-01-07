@@ -15,9 +15,9 @@ namespace Fix.CommandFixers
             {
                 if (consoleBufferInLines[i].Contains(" is misspelled or not recognized by the system."))
                 {
-                    var wrongWord = StringFinder.FindFirstWordBetweenSingleQuotes(consoleBufferInLines[i]);
-                    var correctWord = StringFinder.FindFirstWordBetweenSingleQuotes(consoleBufferInLines[i+1]);
-                    var newCommand = StringFinder.ReplaceFirst(lastCommand, wrongWord, correctWord);
+                    var wrongWord = consoleBufferInLines[i].FindFirstWordBetweenSingleQuotes();
+                    var correctWord = consoleBufferInLines[i + 1].FindFirstWordBetweenSingleQuotes();
+                    var newCommand = lastCommand.ReplaceFirst(wrongWord, correctWord);
                     return CommandFix.FixesWith(newCommand);
                 }
             }

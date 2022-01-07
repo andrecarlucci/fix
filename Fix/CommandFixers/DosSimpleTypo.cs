@@ -15,7 +15,7 @@ namespace Fix.CommandFixers
             {
                 if (consoleBufferInLines[i] == "'dri' is not recognized as an internal or external command,")
                 {
-                    var newCommand = StringFinder.ReplaceFirst(lastCommand, "dri", "dir");
+                    var newCommand = lastCommand.ReplaceFirst("dri", "dir");
                     return CommandFix.FixesWith(newCommand);
                 }
             }
