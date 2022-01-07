@@ -9,9 +9,11 @@ It is a sameless copy of the amazing project [TheFuck](https://github.com/nvbn/t
 
 ## Examples:
 
-### Fixing git typos
+### Fixing git commands
+
+#### Typos
 ```
-C:\dev\personal\Fix>git statu
+C:\dev\fix>git statu
 git: 'statu' is not a git command. See 'git --help'.
 
 The most similar commands are
@@ -19,10 +21,39 @@ The most similar commands are
         stage
         stash
 
-C:\dev\personal\Fix>fix
-C:\dev\personal\Fix>git status
+C:\dev\fix>fix
+C:\dev\fix>git status
 On branch main
 Your branch is up to date with 'origin/main'.
+...
+```
+
+#### Forgeting to set upstream
+```
+C:\dev\fix>git push
+fatal: The current branch main has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin main
+
+
+C:\dev\fix>fix
+C:\dev\fix>git push --set-upstream origin main
+...
+```
+
+### Fixing DOS commands
+#### Typo from dri to dir
+```
+C:\dev\fix>dri /o /b
+'dri' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\dev\fix>fix
+C:\dev\fix>dir /o /b
+.github
+Fix
+Fix.Tests
 ...
 ```
 
