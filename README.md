@@ -57,6 +57,36 @@ Fix.Tests
 ...
 ```
 
+### Fixing Azure CLI commands
+#### Simple Typo
+
+```
+C:\dev>az vm lisr
+'lisr' is misspelled or not recognized by the system.
+Did you mean 'list' ?
+
+Examples from AI knowledge base:
+az vm list
+List all VMs.
+
+https://aka.ms/cli_ref
+Read more about the command in reference docs
+
+C:\dev>fix
+C:\dev>az vm list
+...
+```
+
+#### Login needed
+```
+C:\dev>az vm list
+User someuser@somedomain.com does not exist in MSAL token cache. Run `az login`.
+
+C:\dev>fix
+C:\dev>az login
+...
+```
+
 ## Requirements
 - Windows only (sorry!)
 - Dotnet 5.0 installed
