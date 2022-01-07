@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+﻿using Fix.Helpers;
 
 namespace Fix.CommandFixers
 {
@@ -15,8 +15,7 @@ namespace Fix.CommandFixers
             {
                 if (consoleBufferInLines[i] == "'dri' is not recognized as an internal or external command,")
                 {
-                    var regex = new Regex(Regex.Escape("dri"));
-                    var newCommand = regex.Replace(lastCommand, "dir", 1);
+                    var newCommand = StringFinder.ReplaceFirst(lastCommand, "dri", "dir");
                     return CommandFix.FixesWith(newCommand);
                 }
             }
