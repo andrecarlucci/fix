@@ -1,5 +1,7 @@
 ﻿using Fix.ConsoleHelpers;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Fix.CommandFixers
@@ -18,7 +20,9 @@ namespace Fix.CommandFixers
         private string GetLastCommand(string[] lines)
         {
             var currentPath = ConsoleHelper.GetCurrentPath();
-            var lastCommandLine = lines.Where(x => x.StartsWith(currentPath + ConsoleHelper.CONSOLE_SEPARATOR))
+            var commandPrefix = currentPath + ConsoleHelper.CONSOLE_SEPARATOR;
+            var commandPrefixWithPS = "PS " + commandPrefix;
+            var lastCommandLine = lines.Where(x => x.StartsWith(commandPrefix) || x.StartsWith(commandPrefixWithPS))
                                        .Reverse()
                                        .Skip(1)
                                        .FirstOrDefault();
@@ -27,7 +31,7 @@ namespace Fix.CommandFixers
                 return "";
             }
             var index = lastCommandLine.IndexOf(ConsoleHelper.CONSOLE_SEPARATOR);
-            return lastCommandLine[(index + 1)..];
+            return lastCommandLine[(index + 1)..].Trim();
         }
 
         private string[] FilterLastCommand(string lastCommand, string[] lines)
