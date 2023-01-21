@@ -9,11 +9,12 @@ namespace Fix
     {
         static void Main(string[] args)
         {
-            if(args.Any(x => x == "-debug"))
+            if(args.Contains("-debug"))
             {
                 ConsoleHelper.Debug = true;
             }
-            if (args.Any(x => x == "-plan"))
+
+            if (args.Contains("-plan"))
             {
                 ConsoleHelper.Plan = true;
             }
@@ -23,6 +24,7 @@ namespace Fix
             if (lines.Length < 3)
             {
                 Console.WriteLine("Nothing to fix");
+                return;
             }
             
             var actionManager = new ActionManagerFactory().Create();

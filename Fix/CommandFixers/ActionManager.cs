@@ -1,13 +1,14 @@
 ﻿using Fix.ConsoleHelpers;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Fix.CommandFixers
 {
     public class ActionManager
     {
+        private static readonly Regex _normalizerRegex = new("^(PS )(.*>)(\\s)?(.*)", RegexOptions.Compiled);
         private List<ICommandFixer> _fixActions = new();
 
         public string LastCommand { get; private set; } = "";
@@ -17,12 +18,11 @@ namespace Fix.CommandFixers
             _fixActions.Add(fixAction);
         }
 
-        private string GetLastCommand(string[] lines)
+        private string GetLastCommand(IEnumerable<string> lines)
         {
             var currentPath = ConsoleHelper.GetCurrentPath();
             var commandPrefix = currentPath + ConsoleHelper.CONSOLE_SEPARATOR;
-            var commandPrefixWithPS = "PS " + commandPrefix;
-            var lastCommandLine = lines.Where(x => x.StartsWith(commandPrefix) || x.StartsWith(commandPrefixWithPS))
+            var lastCommandLine = lines.Where(x => x.StartsWith(commandPrefix))
                                        .Reverse()
                                        .Skip(1)
                                        .FirstOrDefault();
@@ -34,20 +34,22 @@ namespace Fix.CommandFixers
             return lastCommandLine[(index + 1)..].Trim();
         }
 
-        private string[] FilterLastCommand(string lastCommand, string[] lines)
+        private string[] FilterLastCommand(string lastCommand, IEnumerable<string> lines)
         {
             var currentPath = ConsoleHelper.GetCurrentPath();
+            var fullLastCommand = $"{currentPath}{ConsoleHelper.CONSOLE_SEPARATOR}{lastCommand}";
             return lines.Reverse()
                         .Skip(1)
-                        .TakeWhile(x => x != $"{currentPath}{ConsoleHelper.CONSOLE_SEPARATOR}{lastCommand}")
+                        .TakeWhile(x => x != fullLastCommand)
                         .Reverse()
                         .ToArray();
         }
 
         public CommandFix GetFix(string[] consoleBufferInLines)
         {
-            LastCommand = GetLastCommand(consoleBufferInLines);
-            var lastCommandResult = FilterLastCommand(LastCommand, consoleBufferInLines);
+            var normalizedBuffer = consoleBufferInLines.Select(s => _normalizerRegex.Replace(s, "$2$4"));
+            LastCommand = GetLastCommand(normalizedBuffer);
+            var lastCommandResult = FilterLastCommand(LastCommand, normalizedBuffer);
 
             LogBuffer(lastCommandResult);
 
