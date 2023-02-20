@@ -92,7 +92,7 @@ C:\dev>az login
 - Dotnet 5.0 installed
 
 ## Instalation
-- Just copy the [fix.exe](https://github.com/andrecarlucci/fix/releases/tag/v0.1) file to your path.
+- Just copy the [fix.exe](https://github.com/andrecarlucci/fix/releases/latest) file to your path.
 
 ## Switches
 - fix.exe -debug : shows debug information.
